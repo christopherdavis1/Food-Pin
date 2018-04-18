@@ -45,7 +45,7 @@ class RestaurantTableViewController: UITableViewController {
         tableView.cellLayoutMarginsFollowReadableWidth = true
         
         // Set the nav header to transparent by giving it no background image
-        // navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.shadowImage = UIImage()
         
         // Set the header font color, font and size. 
@@ -58,7 +58,7 @@ class RestaurantTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // navigationController?.hidesBarsOnSwipe = false
+        navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
