@@ -10,12 +10,48 @@ import UIKit
 
 class RestaurantDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+//  MARK: - Actions
+    @IBAction func closeEmojiReview(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Send the emoji rating image to the header view
+    @IBAction func rateRestaurant(segue: UIStoryboardSegue) {
+        
+        // Once the emoji rating overlay is dismissed...
+        dismiss(animated: true, completion: {
+            
+            // Take the selected rating identifier's image and...
+            if let rating = segue.identifier {
+                self.restaurant.rating = rating
+                self.headerView.ratingImageView.image = UIImage(named: rating)
+            }
+        let scaleTransform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
+        
+        self.headerView.ratingImageView.transform = scaleTransform
+        self.headerView.ratingImageView.alpha = 0
+        
+        // Scale it up and change the opacity from 0 to 1
+        UIView.animate(withDuration: 0.4, delay: 0.2, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.7, options: [], animations: {
+            self.headerView.ratingImageView.transform = .identity
+            self.headerView.ratingImageView.alpha = 1
+            }, completion: nil)
+        })
+    }
+    
+    
+    
+    
+//  MARK: - Outlets
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: RestaurantDetailHeaderView!
     
+    
+//  MARK: - Variables
     var restaurant: Restaurant = Restaurant()
     
-    // MARK: - Load content into the view from the Controller
+    
+//  MARK: - Load content into the view from the Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,6 +141,11 @@ class RestaurantDetailViewController: UIViewController, UITableViewDataSource, U
         if segue.identifier == "showMap" {
             let destinationController = segue.destination as! MapViewController
             destinationController.restaurant = restaurant
+        
+        } else if segue.identifier == "showReview" {
+            let destinationController = segue.destination as! ReviewViewController
+            destinationController.restaurant = restaurant
+            
         }
     }
     

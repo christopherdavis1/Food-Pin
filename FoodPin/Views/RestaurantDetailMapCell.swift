@@ -10,7 +10,9 @@ import UIKit
 import MapKit
 
 class RestaurantDetailMapCell: UITableViewCell {
-
+    
+    
+    // MARK: - Outlets
     @IBOutlet var mapView: MKMapView!
     
     override func awakeFromNib() {
