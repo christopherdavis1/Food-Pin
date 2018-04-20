@@ -24,4 +24,7 @@ class RestaurantDetailHeaderView: UIView {
             heartImageView.tintColor = .white
         }
     }
+    @IBOutlet weak var ratingImageView: UIImageView!
+    
+// Closing Bracket
 }
