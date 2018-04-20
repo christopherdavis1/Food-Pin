@@ -18,6 +18,7 @@ class RestaurantDetailHeaderView: UIView {
             typeLabel.layer.masksToBounds = true
         }
     }
+    
     @IBOutlet weak var heartImageView: UIImageView! {
         didSet {
             heartImageView.image = UIImage(named: "heart-tick")?.withRenderingMode(.alwaysTemplate)
