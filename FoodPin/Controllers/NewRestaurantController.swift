@@ -74,6 +74,44 @@ class NewRestaurantController: UITableViewController, UITextFieldDelegate {
         return true
     }
     
+    // Create an Action Sheet with options to get a photo from the camera or photo library
+    // When the user taps on the first row (row == 0) in the table view.
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            
+            // Name the action sheet
+            let photoSourceRequestController = UIAlertController(title: "", message: "Choose your photo source", preferredStyle: .actionSheet)
+            
+            // Create the camera action
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.allowsEditing = false
+                    imagePicker.sourceType = .camera
+                    
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+            })
+            
+            // Create the photo library action
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { (action) in
+                if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                    let imagePicker = UIImagePickerController()
+                    imagePicker.allowsEditing = false
+                    imagePicker.sourceType = .photoLibrary
+                    
+                    self.present(imagePicker, animated: true, completion: nil)
+                }
+            })
+            
+            // Add both action to the action sheet
+            photoSourceRequestController.addAction(cameraAction)
+            photoSourceRequestController.addAction(photoLibraryAction)
+            
+            present(photoSourceRequestController, animated: true, completion: nil)
+        }
+    }
+    
     
 
 // Closing Bracket
